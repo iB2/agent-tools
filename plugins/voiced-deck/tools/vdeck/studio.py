@@ -34,18 +34,29 @@ def key_file():
     return pathlib.Path(os.environ.get("PODKST_API_KEY_FILE", "~/.config/podkst/api.key")).expanduser()
 
 
-def _key():
+def read_key():
+    """Return (source, key): the env var wins over the key file. source is None when neither exists."""
     k = os.environ.get("PODKST_API_KEY", "").strip()
     if k:
-        return k
+        return "$PODKST_API_KEY", k
     f = key_file()
-    if not f.exists():
-        raise StudioError(f"no podkst API key: set PODKST_API_KEY or run `voiced-deck safebox` to write {f}")
-    if f.stat().st_mode & 0o077:
-        print(f"warning: {f} is readable by other users; run chmod 600 on it", file=sys.stderr)
-    k = f.read_text(encoding="utf-8").strip()
+    if not f.is_file():
+        return None, ""
+    return f, f.read_text(encoding="utf-8").strip()
+
+
+def loose(path):
+    return os.name != "nt" and bool(path.stat().st_mode & 0o077)
+
+
+def _key():
+    src, k = read_key()
+    if src is None:
+        raise StudioError(f"no podkst API key: set PODKST_API_KEY or run `voiced-deck safebox` to write {key_file()}")
+    if isinstance(src, pathlib.Path) and loose(src):
+        print(f"warning: {src} is readable by other users; run chmod 600 on it", file=sys.stderr)
     if not k:
-        raise StudioError(f"{f} is empty")
+        raise StudioError(f"{src} is empty")
     return k
 
 

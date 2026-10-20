@@ -27,6 +27,10 @@ jobs:
         run: python3 -I scripts/scrub_check.py
       - name: Unit tests
         run: npm run test:py
+      - name: Doctor passes every item CI installs
+        run: |
+          python3 -I plugins/voiced-deck/tools/voiced-deck doctor || true
+          python3 -I plugins/voiced-deck/tools/voiced-deck doctor --json | python3 -I -c "import json, sys; bad = [i['id'] for i in json.load(sys.stdin)['items'] if i['status'] != 'PASS' and i['id'] not in ('key', 'access', 'uv', 'whisper')]; print('not passing:', bad); sys.exit(1 if bad else 0)"
       - name: Engine in sync with the template
         run: python3 -I plugins/voiced-deck/tools/voiced-deck engine-sync --check plugins/voiced-deck/examples/demo/deck.html
       - name: Script, builds, performance and manifest agree
