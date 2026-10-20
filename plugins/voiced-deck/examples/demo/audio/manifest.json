@@ -1,0 +1,394 @@
+{
+ "duration": 115.38,
+ "voice": "Charon",
+ "engine": "podkst Studio",
+ "audio": {
+  "m4a": "audio/deck.m4a",
+  "png": "audio/deck.png"
+ },
+ "slides": [
+  {
+   "slide": 1,
+   "segments": [
+    {
+     "k": 0,
+     "start": 0,
+     "end": 9.815,
+     "lines": [
+      {
+       "id": "s01k0l01",
+       "start": 0,
+       "end": 5.274,
+       "text": "Every spring, beekeepers lift a lid... and find a silent hive."
+      },
+      {
+       "id": "s01k0l02",
+       "start": 5.564,
+       "end": 8.421,
+       "text": "We think that hive was telling them for weeks."
+      },
+      {
+       "id": "s01k0l03",
+       "start": 8.571,
+       "end": 9.815,
+       "text": "Nobody was listening."
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "start": 10.155,
+     "end": 21.046,
+     "lines": [
+      {
+       "id": "s01k1l01",
+       "start": 10.155,
+       "end": 14.249,
+       "text": "Quick note. Hivewise is made up, and so is, uh, every number here."
+      },
+      {
+       "id": "s01k1l02",
+       "start": 14.419,
+       "end": 16.124,
+       "text": "The dots still work like a real deck."
+      },
+      {
+       "id": "s01k1l03",
+       "start": 16.264,
+       "end": 21.046,
+       "text": "Solid is measured, half is inferred, dashed is a guess."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 2,
+   "segments": [
+    {
+     "k": 0,
+     "start": 21.271,
+     "end": 21.271,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "start": 21.496,
+     "end": 29.447,
+     "lines": [
+      {
+       "id": "s02k1l01",
+       "start": 21.496,
+       "end": 26.093,
+       "text": "Last winter our pilot beekeepers lost thirty-eight percent of their colonies."
+      },
+      {
+       "id": "s02k1l02",
+       "start": 26.303,
+       "end": 29.447,
+       "text": "Varroa mites. A failed queen. A cold snap."
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "start": 29.717,
+     "end": 33.935,
+     "lines": [
+      {
+       "id": "s02k2l01",
+       "start": 29.717,
+       "end": 32.322,
+       "text": "And most of those losses were found in spring."
+      },
+      {
+       "id": "s02k2l02",
+       "start": 32.462,
+       "end": 33.935,
+       "text": "Too late to do anything."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 3,
+   "segments": [
+    {
+     "k": 0,
+     "start": 34.435,
+     "end": 36.005,
+     "lines": [
+      {
+       "id": "s03k0l01",
+       "start": 34.435,
+       "end": 36.005,
+       "text": "Here is the insight."
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "start": 36.215,
+     "end": 42.125,
+     "lines": [
+      {
+       "id": "s03k1l01",
+       "start": 36.215,
+       "end": 42.125,
+       "text": "A healthy colony hums. Steady, low, almost, almost boring."
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "start": 42.335,
+     "end": 47.077,
+     "lines": [
+      {
+       "id": "s03k2l01",
+       "start": 42.335,
+       "end": 44.521,
+       "text": "A queenless colony roars."
+      },
+      {
+       "id": "s03k2l02",
+       "start": 44.661,
+       "end": 47.077,
+       "text": "The pitch climbs, and it gets ragged."
+      }
+     ]
+    },
+    {
+     "k": 3,
+     "start": 47.347,
+     "end": 55.036,
+     "lines": [
+      {
+       "id": "s03k3l01",
+       "start": 47.347,
+       "end": 52.356,
+       "text": "We hear that change about three weeks before a beekeeper would see it."
+      },
+      {
+       "id": "s03k3l02",
+       "start": 52.506,
+       "end": 55.036,
+       "text": "That number is inferred, from forty hives."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 4,
+   "segments": [
+    {
+     "k": 0,
+     "start": 55.516,
+     "end": 57.698,
+     "lines": [
+      {
+       "id": "s04k0l01",
+       "start": 55.516,
+       "end": 57.698,
+       "text": "So we built the ear."
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "start": 57.908,
+     "end": 61.557,
+     "lines": [
+      {
+       "id": "s04k1l01",
+       "start": 57.908,
+       "end": 61.557,
+       "text": "A small sensor sits under the lid and listens all day."
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "start": 61.767,
+     "end": 67.015,
+     "lines": [
+      {
+       "id": "s04k2l01",
+       "start": 61.767,
+       "end": 63.926,
+       "text": "A tiny model on the device scores the sound..."
+      },
+      {
+       "id": "s04k2l02",
+       "start": 64.046,
+       "end": 67.015,
+       "text": "so it runs for a year on one battery."
+      }
+     ]
+    },
+    {
+     "k": 3,
+     "start": 67.285,
+     "end": 70.845,
+     "lines": [
+      {
+       "id": "s04k3l01",
+       "start": 67.285,
+       "end": 70.845,
+       "text": "When something changes, your phone tells you which hive, and what to check."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 5,
+   "segments": [
+    {
+     "k": 0,
+     "start": 71.095,
+     "end": 71.095,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "start": 71.345,
+     "end": 77.886,
+     "lines": [
+      {
+       "id": "s05k1l01",
+       "start": 71.345,
+       "end": 73.731,
+       "text": "We started in January with forty hives."
+      },
+      {
+       "id": "s05k1l02",
+       "start": 73.881,
+       "end": 77.886,
+       "text": "Today it's one thousand two hundred and forty. All through word of mouth."
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "start": 78.156,
+     "end": 84.916,
+     "lines": [
+      {
+       "id": "s05k2l01",
+       "start": 78.156,
+       "end": 81.88,
+       "text": "The dashed line is our guess for December. Six thousand hives."
+      },
+      {
+       "id": "s05k2l02",
+       "start": 82.05,
+       "end": 84.916,
+       "text": "It's a guess, and I'll, I'll say so every time."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 6,
+   "segments": [
+    {
+     "k": 0,
+     "start": 85.166,
+     "end": 85.166,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "start": 85.416,
+     "end": 88.889,
+     "lines": [
+      {
+       "id": "s06k1l01",
+       "start": 85.416,
+       "end": 88.889,
+       "text": "The model is simple. Nine dollars a hive, a month."
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "start": 89.159,
+     "end": 98.261,
+     "lines": [
+      {
+       "id": "s06k2l01",
+       "start": 89.159,
+       "end": 91.615,
+       "text": "A hundred and twelve beekeepers pay us today."
+      },
+      {
+       "id": "s06k2l02",
+       "start": 91.765,
+       "end": 94.664,
+       "text": "We think the margin is about seventy-one percent."
+      },
+      {
+       "id": "s06k2l03",
+       "start": 94.804,
+       "end": 98.261,
+       "text": "Payback in five months is, um, still a guess."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 7,
+   "segments": [
+    {
+     "k": 0,
+     "start": 98.761,
+     "end": 100.438,
+     "lines": [
+      {
+       "id": "s07k0l01",
+       "start": 98.761,
+       "end": 100.438,
+       "text": "So here is the ask."
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "start": 100.648,
+     "end": 115.38,
+     "lines": [
+      {
+       "id": "s07k1l01",
+       "start": 100.648,
+       "end": 103.45,
+       "text": "We're raising one point two million dollars."
+      },
+      {
+       "id": "s07k1l02",
+       "start": 103.6,
+       "end": 108.312,
+       "text": "Almost half goes into sensors, a third into the team, the rest into sales."
+      },
+      {
+       "id": "s07k1l03",
+       "start": 108.492,
+       "end": 112.451,
+       "text": "That buys eighteen months, and ten thousand hives listening."
+      },
+      {
+       "id": "s07k1l04",
+       "start": 112.901,
+       "end": 115.38,
+       "text": "Thank you. I'd love your questions."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hivewise. Hear the hive before it fails. A fictional seed pitch</title></head><body>
+<script>
+var DECK="deck.inline.png", AUDIO="audio/deck.png";
+function unpack(src){return new Promise(function(res,rej){var i=new Image();i.onload=function(){var c=document.createElement('canvas');c.width=i.naturalWidth;c.height=i.naturalHeight;var x=c.getContext('2d',{willReadFrequently:true});x.drawImage(i,0,0);var d=x.getImageData(0,0,c.width,c.height).data;var rgb=new Uint8Array(c.width*c.height*3);for(var p=0,q=0;p<d.length;p+=4){rgb[q++]=d[p];rgb[q++]=d[p+1];rgb[q++]=d[p+2];}var n=((rgb[0]<<24)|(rgb[1]<<16)|(rgb[2]<<8)|rgb[3])>>>0;res(rgb.slice(4,4+n));};i.onerror=rej;i.src=src;});}
+unpack(DECK).then(function(b){var html=new TextDecoder().decode(b);var P=["audio/d", "eck.png"].join('');if(AUDIO&&P)html=html.split(P).join(AUDIO);document.open();document.write(html);document.close();});
+</script></body></html>

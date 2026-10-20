@@ -1,0 +1,24 @@
+{
+  "name": "agent-tools",
+  "owner": {
+    "name": "iB2"
+  },
+  "metadata": {
+    "description": "Tools for coding agents. One plugin per tool, each with a skill, its CLIs and a working demo.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "voiced-deck",
+      "source": "./plugins/voiced-deck",
+      "description": "Keynote-grade single-file HTML decks that present themselves with a natural podkst voice: builds and slides follow the audio clock.",
+      "version": "0.1.0",
+      "author": {
+        "name": "iB2"
+      },
+      "license": "MIT",
+      "keywords": ["slides", "deck", "presentation", "pitch", "tts", "voice", "podkst"],
+      "category": "productivity"
+    }
+  ]
+}

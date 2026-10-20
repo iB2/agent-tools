@@ -1,0 +1,16 @@
+{
+  "name": "agent-tools",
+  "private": true,
+  "description": "Tools for coding agents, packaged as a Claude Code plugin marketplace.",
+  "license": "MIT",
+  "scripts": {
+    "test": "npm run test:py && npm run test:presenter && npm run scrub",
+    "test:py": "python3 -m unittest discover -s plugins/voiced-deck/tests -p 'test_*.py'",
+    "test:presenter": "node plugins/voiced-deck/tests/presenter/run.js",
+    "test:sync": "python3 -I plugins/voiced-deck/tools/voiced-deck sync --deck plugins/voiced-deck/examples/demo/deck.html --script plugins/voiced-deck/examples/demo/script.md --performance plugins/voiced-deck/examples/demo/performance.json --browser",
+    "scrub": "python3 -I scripts/scrub_check.py"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

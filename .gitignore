@@ -1,0 +1,11 @@
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+# Studio state and raw renders hold project, take and render ids; keep them local
+**/studio-state.json
+**/master.json
+**/*.wav
+**/audition/
+**/probe/
+shots/

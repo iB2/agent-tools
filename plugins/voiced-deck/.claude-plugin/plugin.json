@@ -1,0 +1,12 @@
+{
+  "name": "voiced-deck",
+  "version": "0.1.0",
+  "description": "Keynote-grade single-file HTML decks that present themselves with a natural podkst voice: builds and slides follow the audio clock.",
+  "author": {
+    "name": "iB2"
+  },
+  "homepage": "https://github.com/iB2/agent-tools/tree/main/plugins/voiced-deck",
+  "repository": "https://github.com/iB2/agent-tools",
+  "license": "MIT",
+  "keywords": ["slides", "deck", "presentation", "pitch", "tts", "voice", "podkst"]
+}

@@ -1,0 +1,35 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install numpy
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Scrub check
+        run: python3 -I scripts/scrub_check.py
+      - name: Unit tests
+        run: npm run test:py
+      - name: Engine in sync with the template
+        run: python3 -I plugins/voiced-deck/tools/voiced-deck engine-sync --check plugins/voiced-deck/examples/demo/deck.html
+      - name: Script, builds, performance and manifest agree
+        run: npm run test:sync
+      - name: Presenter tests
+        run: npm run test:presenter

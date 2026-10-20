@@ -1,0 +1,240 @@
+[
+ {
+  "id": "s01k0l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Every spring, beekeepers lift a lid... and find a silent hive.",
+  "hyp": "Every spring, beekeepers lift a lid and find a silent hive."
+ },
+ {
+  "id": "s01k0l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "We think that hive was telling them for weeks.",
+  "hyp": "We think that hive was telling them for weeks."
+ },
+ {
+  "id": "s01k0l03",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Nobody was listening.",
+  "hyp": "Nobody was listening."
+ },
+ {
+  "id": "s01k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Quick note. Hivewise is made up, and so is, uh, every number here.",
+  "hyp": "Quick note, HiveWise is made up and so is every number here."
+ },
+ {
+  "id": "s01k1l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "The dots still work like a real deck.",
+  "hyp": "The dots still work like a real deck."
+ },
+ {
+  "id": "s01k1l03",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Solid is measured, half is inferred, dashed is a guess.",
+  "hyp": "Solid is measured, half is inferred, dashed is a guess."
+ },
+ {
+  "id": "s02k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Last winter our pilot beekeepers lost thirty-eight percent of their colonies.",
+  "hyp": "Last winter, our pilot beekeepers lost 38% of their colonies."
+ },
+ {
+  "id": "s02k1l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Varroa mites. A failed queen. A cold snap.",
+  "hyp": "Varroa mites. A failed queen. A cold snap."
+ },
+ {
+  "id": "s02k2l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "And most of those losses were found in spring.",
+  "hyp": "And most of those losses were found in spring."
+ },
+ {
+  "id": "s02k2l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Too late to do anything.",
+  "hyp": "Too late to do anything."
+ },
+ {
+  "id": "s03k0l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Here is the insight.",
+  "hyp": "Here is the insight."
+ },
+ {
+  "id": "s03k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "A healthy colony hums. Steady, low, almost, almost boring.",
+  "hyp": "A healthy colony hums. Steady, low, almost, almost boring."
+ },
+ {
+  "id": "s03k2l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "A queenless colony roars.",
+  "hyp": "A queenless colony roars."
+ },
+ {
+  "id": "s03k2l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "The pitch climbs, and it gets ragged.",
+  "hyp": "The pitch climbs, and it gets ragged."
+ },
+ {
+  "id": "s03k3l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "We hear that change about three weeks before a beekeeper would see it.",
+  "hyp": "We hear that change about three weeks before a beekeeper would see it."
+ },
+ {
+  "id": "s03k3l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "That number is inferred, from forty hives.",
+  "hyp": "That number is inferred from 40 hives."
+ },
+ {
+  "id": "s04k0l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "So we built the ear.",
+  "hyp": "So we built the ear!"
+ },
+ {
+  "id": "s04k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "A small sensor sits under the lid and listens all day.",
+  "hyp": "A small sensor sits under the lid and listens all day."
+ },
+ {
+  "id": "s04k2l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "A tiny model on the device scores the sound...",
+  "hyp": "A tiny model on the device scores the sound."
+ },
+ {
+  "id": "s04k2l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "so it runs for a year on one battery.",
+  "hyp": "So it runs for a year on one battery."
+ },
+ {
+  "id": "s04k3l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "When something changes, your phone tells you which hive, and what to check.",
+  "hyp": "When something changes, your phone tells you which hive and what to check."
+ },
+ {
+  "id": "s05k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "We started in January with forty hives.",
+  "hyp": "We started in January with 40 hives."
+ },
+ {
+  "id": "s05k1l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Today it's one thousand two hundred and forty. All through word of mouth.",
+  "hyp": "Today, it's 1,240, all through word of mouth."
+ },
+ {
+  "id": "s05k2l01",
+  "wer": 0.2,
+  "extra": 0,
+  "ref": "The dashed line is our guess for December. Six thousand hives.",
+  "hyp": "The Dash Line is our guest for December.  6,000 hives."
+ },
+ {
+  "id": "s05k2l02",
+  "wer": 0.067,
+  "extra": -1,
+  "ref": "It's a guess, and I'll, I'll say so every time.",
+  "hyp": "It's a guess, and I'll say so every time."
+ },
+ {
+  "id": "s06k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "The model is simple. Nine dollars a hive, a month.",
+  "hyp": "The model is simple, $9 a hive a month."
+ },
+ {
+  "id": "s06k2l01",
+  "wer": 0.077,
+  "extra": 1,
+  "ref": "A hundred and twelve beekeepers pay us today.",
+  "hyp": "112 beekeepers pay us today."
+ },
+ {
+  "id": "s06k2l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "We think the margin is about seventy-one percent.",
+  "hyp": "We think the margin is about 71%."
+ },
+ {
+  "id": "s06k2l03",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Payback in five months is, um, still a guess.",
+  "hyp": "Payback in five months is, um, still a guess."
+ },
+ {
+  "id": "s07k0l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "So here is the ask.",
+  "hyp": "So here is the ask."
+ },
+ {
+  "id": "s07k1l01",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "We're raising one point two million dollars.",
+  "hyp": "We're raising $1.2 million."
+ },
+ {
+  "id": "s07k1l02",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Almost half goes into sensors, a third into the team, the rest into sales.",
+  "hyp": "Almost half goes into sensors, a third into the team, the rest into sales."
+ },
+ {
+  "id": "s07k1l03",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "That buys eighteen months, and ten thousand hives listening.",
+  "hyp": "That buys 18 months and 10,000 hives listening."
+ },
+ {
+  "id": "s07k1l04",
+  "wer": 0.0,
+  "extra": 0,
+  "ref": "Thank you. I'd love your questions.",
+  "hyp": "Thank you. I'd love your questions."
+ }
+]

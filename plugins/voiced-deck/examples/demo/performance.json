@@ -1,0 +1,355 @@
+{
+ "title": "Hivewise seed pitch (fictional)",
+ "language": "en-US",
+ "quality": "pro",
+ "voiceDefault": "builtin:Charon",
+ "speaker": "Narrator",
+ "pace": "a live pitch: brisk, upbeat and natural, controlled nerves, confident never arrogant",
+ "pronounce": {
+  "Varroa": "say 'Varroa' as vuh-ROH-uh, the Latin name of the mite"
+ },
+ "respell": {},
+ "slides": [
+  {
+   "slide": 1,
+   "segments": [
+    {
+     "k": 0,
+     "lines": [
+      {
+       "id": "s01k0l01",
+       "text": "Every spring, beekeepers lift a lid... and find a silent hive.",
+       "style": "deep voice, a quick breath in, then bright and vivid like opening a story on stage, a small hush on 'silent hive'",
+       "gapAfterMs": 290
+      },
+      {
+       "id": "s01k0l02",
+       "text": "We think that hive was telling them for weeks.",
+       "style": "leaning in, warm and certain, energy rising, pitch lifting at the end",
+       "gapAfterMs": 150
+      },
+      {
+       "id": "s01k0l03",
+       "text": "Nobody was listening.",
+       "style": "short and quiet, a little rueful, let it land, no falling sigh",
+       "gapAfterMs": 340
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s01k1l01",
+       "text": "Quick note. Hivewise is made up, and so is, uh, every number here.",
+       "style": "light and quick aside, a half smile, a tiny stumble on 'every number'",
+       "gapAfterMs": 170
+      },
+      {
+       "id": "s01k1l02",
+       "text": "The dots still work like a real deck.",
+       "style": "brisk and helpful, upbeat",
+       "gapAfterMs": 140
+      },
+      {
+       "id": "s01k1l03",
+       "text": "Solid is measured, half is inferred, dashed is a guess.",
+       "style": "crisp list, three even steps, each one a little higher, ending lifted",
+       "gapAfterMs": 450
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 2,
+   "segments": [
+    {
+     "k": 0,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s02k1l01",
+       "text": "Last winter our pilot beekeepers lost thirty-eight percent of their colonies.",
+       "style": "serious and lower, weight on 'thirty-eight percent', controlled",
+       "gapAfterMs": 210
+      },
+      {
+       "id": "s02k1l02",
+       "text": "Varroa mites. A failed queen. A cold snap.",
+       "style": "quick rapid list, three short beats, a little incredulous",
+       "gapAfterMs": 270
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "lines": [
+      {
+       "id": "s02k2l01",
+       "text": "And most of those losses were found in spring.",
+       "style": "building, slower, setting it up",
+       "gapAfterMs": 140
+      },
+      {
+       "id": "s02k2l02",
+       "text": "Too late to do anything.",
+       "style": "short and blunt, stress on 'too late', firm not sad, slight lift at the end",
+       "gapAfterMs": 500
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 3,
+   "segments": [
+    {
+     "k": 0,
+     "lines": [
+      {
+       "id": "s03k0l01",
+       "text": "Here is the insight.",
+       "style": "energy back up, eager, like sharing a secret you love",
+       "gapAfterMs": 210
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s03k1l01",
+       "text": "A healthy colony hums. Steady, low, almost, almost boring.",
+       "style": "calm and smooth, a smile on 'boring', a small playful repeat",
+       "gapAfterMs": 210
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "lines": [
+      {
+       "id": "s03k2l01",
+       "text": "A queenless colony roars.",
+       "style": "a jolt of energy, stress on 'roars', bigger",
+       "gapAfterMs": 140
+      },
+      {
+       "id": "s03k2l02",
+       "text": "The pitch climbs, and it gets ragged.",
+       "style": "quick and vivid, rising through the line",
+       "gapAfterMs": 270
+      }
+     ]
+    },
+    {
+     "k": 3,
+     "lines": [
+      {
+       "id": "s03k3l01",
+       "text": "We hear that change about three weeks before a beekeeper would see it.",
+       "style": "the key claim, slower and certain, every word placed, lifting on 'three weeks'",
+       "gapAfterMs": 150
+      },
+      {
+       "id": "s03k3l02",
+       "text": "That number is inferred, from forty hives.",
+       "style": "honest and quick, lower, a straight aside",
+       "gapAfterMs": 480
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 4,
+   "segments": [
+    {
+     "k": 0,
+     "lines": [
+      {
+       "id": "s04k0l01",
+       "text": "So we built the ear.",
+       "style": "confident and proud, short, a grin in the voice",
+       "gapAfterMs": 210
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s04k1l01",
+       "text": "A small sensor sits under the lid and listens all day.",
+       "style": "warm and clear, easy pace",
+       "gapAfterMs": 210
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "lines": [
+      {
+       "id": "s04k2l01",
+       "text": "A tiny model on the device scores the sound...",
+       "style": "quicker, a little techie excitement",
+       "gapAfterMs": 120
+      },
+      {
+       "id": "s04k2l02",
+       "text": "so it runs for a year on one battery.",
+       "style": "pleased, stress on 'a year', bright lift",
+       "gapAfterMs": 270
+      }
+     ]
+    },
+    {
+     "k": 3,
+     "lines": [
+      {
+       "id": "s04k3l01",
+       "text": "When something changes, your phone tells you which hive, and what to check.",
+       "style": "reassuring and direct, talking to one beekeeper, ending open and lifted",
+       "gapAfterMs": 500
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 5,
+   "segments": [
+    {
+     "k": 0,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s05k1l01",
+       "text": "We started in January with forty hives.",
+       "style": "brisk, matter-of-fact, setting a baseline",
+       "gapAfterMs": 150
+      },
+      {
+       "id": "s05k1l02",
+       "text": "Today it's one thousand two hundred and forty. All through word of mouth.",
+       "style": "rising pride, stress on the number, quick and bright on 'word of mouth'",
+       "gapAfterMs": 270
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "lines": [
+      {
+       "id": "s05k2l01",
+       "text": "The dashed line is our guess for December. Six thousand hives.",
+       "style": "candid, slightly lower, a beat before 'six thousand'",
+       "gapAfterMs": 170
+      },
+      {
+       "id": "s05k2l02",
+       "text": "It's a guess, and I'll, I'll say so every time.",
+       "style": "honest and warm, a tiny stumble on the repeat, ending lifted",
+       "gapAfterMs": 500
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 6,
+   "segments": [
+    {
+     "k": 0,
+     "lines": []
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s06k1l01",
+       "text": "The model is simple. Nine dollars a hive, a month.",
+       "style": "crisp and confident, stress on 'nine dollars', a small smile",
+       "gapAfterMs": 270
+      }
+     ]
+    },
+    {
+     "k": 2,
+     "lines": [
+      {
+       "id": "s06k2l01",
+       "text": "A hundred and twelve beekeepers pay us today.",
+       "style": "proud, quick, measured fact",
+       "gapAfterMs": 150
+      },
+      {
+       "id": "s06k2l02",
+       "text": "We think the margin is about seventy-one percent.",
+       "style": "careful, even, a touch lower",
+       "gapAfterMs": 140
+      },
+      {
+       "id": "s06k2l03",
+       "text": "Payback in five months is, um, still a guess.",
+       "style": "candid and light, a small search before 'still a guess'",
+       "gapAfterMs": 500
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "slide": 7,
+   "segments": [
+    {
+     "k": 0,
+     "lines": [
+      {
+       "id": "s07k0l01",
+       "text": "So here is the ask.",
+       "style": "lean in, quieter, a nervous energy held in check",
+       "gapAfterMs": 210
+      }
+     ]
+    },
+    {
+     "k": 1,
+     "lines": [
+      {
+       "id": "s07k1l01",
+       "text": "We're raising one point two million dollars.",
+       "style": "strong and clear, the headline number, no hesitation",
+       "gapAfterMs": 150
+      },
+      {
+       "id": "s07k1l02",
+       "text": "Almost half goes into sensors, a third into the team, the rest into sales.",
+       "style": "quick and organized, counting it off, rising",
+       "gapAfterMs": 180
+      },
+      {
+       "id": "s07k1l03",
+       "text": "That buys eighteen months, and ten thousand hives listening.",
+       "style": "big finish, energized and believing, lifting on 'ten thousand hives'",
+       "gapAfterMs": 450
+      },
+      {
+       "id": "s07k1l04",
+       "text": "Thank you. I'd love your questions.",
+       "style": "warm and relaxed, smiling, open and inviting",
+       "gapAfterMs": 300
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
