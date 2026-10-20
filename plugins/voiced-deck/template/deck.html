@@ -793,7 +793,7 @@ document.getElementById("vrep").addEventListener("click",function(e){e.stopPropa
 document.addEventListener("visibilitychange",function(){if(!document.hidden&&phase==="play"){resumeCtx();vFrame(false);}});
 
 function setV(s){vstate=s;bpv.setAttribute("data-voice",s);if(s==="loading")bpv.setAttribute("aria-busy","true");else bpv.removeAttribute("aria-busy");}
-/* direct means no Web Audio analyser: a file: or cross-origin source would play silent through it */
+/* direct means no Web Audio analyser: a file: or cross-origin source would play silent through it, and a data: source might in some engines */
 /* a packed PNG carries the audio bytes in its RGB channels: a 4-byte big-endian length, then the bytes */
 function unpack(src,ok,bad){
   var im=new Image();
@@ -821,7 +821,8 @@ function loadVoice(){
   if(!VO){setV("none");return;}
   setV("loading");
   var A=VO.audio,png=A.png,m4a=A.m4a,tries=[];
-  var viaPng=png?function(ok,bad){unpack(png,ok,bad);}:null,viaM4a=m4a?function(ok,bad){probeDirect(m4a,function(u){direct=location.protocol==="file:"||new URL(u,location.href).origin!==location.origin;ok(u);},bad);}:null;
+  if(/^data:/.test(m4a||""))direct=true;
+  var viaPng=png?function(ok,bad){unpack(png,ok,bad);}:null,viaM4a=m4a?function(ok,bad){probeDirect(m4a,function(u){direct=/^data:/.test(u)||location.protocol==="file:"||new URL(u,location.href).origin!==location.origin;ok(u);},bad);}:null;
   if(png&&(/^data:/.test(png)||/[?&]voice=png/.test(location.search)))tries=[viaPng,viaM4a];else tries=[viaM4a,viaPng];
   tries=tries.filter(Boolean);
   (function next(j){
@@ -860,7 +861,7 @@ requestAnimationFrame(function(){requestAnimationFrame(function(){go(h>0?h-1:0,0
 window.__deck={go:go,next:next,prev:prev,count:N,state:function(){return{cur:cur,step:step,max:visibleBuildMax(cur),narrow:narrow,notes:notes.classList.contains("open"),pv:pvOn};},
   builds:function(){return slides.map(function(s,i){return visibleBuildMax(i);});},script:function(){return PITCH;},checkSync:checkSync,
   instant:function(on){deck.classList.toggle("instant",!!on);},notes:toggleNotes,presenter:togglePV,
-  voice:{state:function(){return{phase:phase,voice:vstate,t:audio.currentTime,paused:audio.paused,analyser:!!an,direct:direct,line:kG,cap:vcap.textContent};},
+  voice:{state:function(){return{phase:phase,voice:vstate,t:audio.currentTime,paused:audio.paused,analyser:!!an,ctx:ctx?ctx.state:null,direct:direct,line:kG,cap:vcap.textContent};},
     audio:audio,manifest:function(){return VO;},start:startShow,stop:stopShow,toggle:togglePlay,jump:jumpSlide,rate:function(r){rate=r;audio.playbackRate=r;}}};
 })();
 </script>

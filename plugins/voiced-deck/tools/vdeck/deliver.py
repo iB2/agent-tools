@@ -1,16 +1,20 @@
-"""Delivery: pack a voiced deck into PNGs plus a tiny loader, for hosts that only inline images.
+"""Delivery: one self-contained HTML with the audio inside, or PNGs plus a tiny loader for hosts that only inline images.
 
 The loader reads the deck PNG through a canvas, decodes the HTML, swaps the deck's audio PNG
 path for the loader's AUDIO value (a data URI once the host has inlined it), and writes the
 result into the page. The path to swap is built by string concatenation so the host's path
 inliner does not rewrite it inside the loader.
 """
+import base64
 import functools
 import http.server
 import json
 import mimetypes
 import os
 import pathlib
+import shutil
+import subprocess
+import tempfile
 
 from . import deckfile, pngpack
 
@@ -44,6 +48,50 @@ def pack_deck(deck, out_dir=None):
     page = out / f"{deck.stem}.inline.html"
     page.write_text(loader, encoding="utf-8")
     return page, deck_png, audio
+
+
+def _audio_bytes(deck, man, audio):
+    if audio:
+        return pathlib.Path(audio).read_bytes()
+    src = man.get("audio") or {}
+    m4a, png = src.get("m4a") or "", src.get("png") or ""
+    if m4a.startswith("data:"):
+        return base64.b64decode(m4a.split(",", 1)[1])
+    if m4a and (deck.parent / m4a).is_file():
+        return (deck.parent / m4a).read_bytes()
+    if png and not png.startswith("data:") and (deck.parent / png).is_file():
+        return pngpack.unpack((deck.parent / png).read_bytes())
+    raise SystemExit(f"no audio found for {deck.name}; pass --audio or run render first")
+
+
+def reencode(data, bitrate):
+    if not shutil.which("ffmpeg"):
+        raise SystemExit("--bitrate needs ffmpeg; run `voiced-deck doctor` for the fix")
+    with tempfile.TemporaryDirectory() as d:
+        src, dst = pathlib.Path(d) / "in", pathlib.Path(d) / "out.m4a"
+        src.write_bytes(data)
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-map", "0:a:0", "-map_metadata", "-1", "-ac", "1",
+                        "-c:a", "aac", "-b:a", bitrate, "-movflags", "+faststart", str(dst)], check=True)
+        return dst.read_bytes()
+
+
+def pack_single(deck, audio=None, out=None, bitrate=None):
+    """Write one HTML that carries its audio as a data: URI in the manifest, so it plays with no files beside it."""
+    deck = pathlib.Path(deck)
+    html = deckfile.read(deck)
+    man = deckfile.manifest(html)
+    if not man:
+        raise SystemExit(f"{deck.name} has no voice manifest; run render first")
+    data = _audio_bytes(deck, man, audio)
+    if bitrate:
+        data = reencode(data, bitrate)
+    elif data[4:8] != b"ftyp":
+        raise SystemExit("the audio is not an MP4/AAC file; pass --bitrate (for example 32k) to encode it")
+    man = dict(man, audio={"m4a": "data:audio/mp4;base64," + base64.b64encode(data).decode("ascii")})
+    dest = pathlib.Path(out) if out else deck.with_name(deck.stem + ".single.html")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    deckfile.write(dest, deckfile.set_manifest(html, man))
+    return dest, len(data)
 
 
 def serve(root, port=8765):

@@ -2,7 +2,7 @@
 // Runs every presenter test in order and exits non-zero if any failed.
 const { spawnSync } = require('child_process');
 const path = require('path');
-const tests = ['sweep.test.js', 'voice.test.js', 'blocked.test.js', 'loader.test.js'];
+const tests = ['sweep.test.js', 'voice.test.js', 'blocked.test.js', 'loader.test.js', 'single.test.js'];
 let failed = 0;
 for (const t of tests) {
   console.log(`\n# ${t}`);
