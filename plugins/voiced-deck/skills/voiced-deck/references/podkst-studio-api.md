@@ -4,6 +4,15 @@
 
 Base URL `https://api.podkst.ai/v1`. Auth is `Authorization: Bearer <key>`. The key needs the scopes `generate:podcast`, `read:jobs` and `billing:read`.
 
+## Get a key
+
+1. Sign in at https://podkst.ai.
+2. Open Dashboard, then Settings, then API Keys (https://podkst.ai/dashboard/api-keys).
+3. Create a key with the scopes `generate:podcast`, `read:jobs` and `billing:read`.
+4. Save it in one of two ways. Add `export PODKST_API_KEY=<your key>` to the shell profile, or run `voiced-deck safebox` and paste the key into its local form. The form writes `~/.config/podkst/api.key` with mode 0600 and never echoes the key.
+
+`voiced-deck doctor` then calls `GET /credits` once. A 200 means podkst accepts the key and it has `billing:read`. A 401 means podkst rejects the key. A 403 with `permission_error` names a missing scope. Doctor does not test `generate:podcast` or `read:jobs`, because that needs a call that writes. The first render tests them.
+
 ## Facts learned the hard way
 
 - **Rate limit.** 10 requests a minute on the base plan. A 429 carries `error.retry_after` in seconds (or a `Retry-After` header). Wait that long and retry. The client also spaces its own calls.
@@ -29,6 +38,10 @@ Base URL `https://api.podkst.ai/v1`. Auth is `Authorization: Bearer <key>`. The 
 | `POST /studio/projects/{id}/master` `{preset, max_credits}` | Presets `wav-master`, `podcast-mono` (-19 LUFS) and `podcast-stereo` (-16 LUFS, -1 dBTP). The result has a signed `url`, `duration_s`, `integrated_lufs`, `true_peak_dbtp` and `lines: [{segment_id, start_s, end_s}]`. |
 
 Takes are 24 kHz mono, levelled per take before mixing. The voiced deck uses `wav-master` and encodes it to 40 kbps mono AAC (`VD_AAC_KBPS` changes the rate).
+
+## The podkst MCP server is optional
+
+The tools call the REST API themselves and do not need the MCP server. It helps for manual edits to a Studio project from a chat: one line, a different take, undo and redo. See the plugin README for how to add it.
 
 ## Ids are private
 

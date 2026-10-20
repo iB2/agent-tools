@@ -6,7 +6,7 @@ import shutil
 import subprocess
 import sys
 
-from . import deckfile, deliver, manifest, perf as P, pngpack, script as S
+from . import deckfile, deliver, doctor, manifest, perf as P, pngpack, script as S
 
 TOOLS = pathlib.Path(__file__).resolve().parents[1]
 CAP = int(os.environ.get("VD_MAX_CREDITS", "50"))
@@ -222,6 +222,14 @@ def cmd_safebox(a):
     safebox.run(a.port, pathlib.Path(a.key_file).expanduser() if a.key_file else None)
 
 
+def cmd_doctor(a):
+    sys.exit(doctor.doctor(a.json, a.os))
+
+
+def cmd_setup(a):
+    sys.exit(doctor.setup(a.yes, a.dry_run, a.asr, a.os))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="voiced-deck", description="Build a keynote-grade HTML deck that presents itself with a podkst voice.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -231,6 +239,14 @@ def main(argv=None):
         p.set_defaults(fn=fn)
         return p
 
+    p = add("doctor", cmd_doctor, "check Python, numpy, ffmpeg, Node, Playwright, uv and the podkst key, with a fix for each gap")
+    p.add_argument("--json", action="store_true")
+    p.add_argument("--os", choices=doctor.OSES, help="show the fixes for this OS instead of the one detected")
+    p = add("setup", cmd_setup, "install what is safe to install (Playwright, Chromium, whisper models, the key), print the rest, then run doctor")
+    p.add_argument("--yes", action="store_true", help="run every step without asking")
+    p.add_argument("--dry-run", action="store_true", help="print the plan and change nothing")
+    p.add_argument("--asr", action="store_true", help="also download the faster-whisper models with uv")
+    p.add_argument("--os", choices=doctor.OSES, help="show the fixes for this OS instead of the one detected")
     p = add("new", cmd_new, "copy the deck template to a new file")
     p.add_argument("deck")
     p.add_argument("--force", action="store_true")

@@ -24,10 +24,22 @@ The demo in `${CLAUDE_PLUGIN_ROOT}/examples/demo/` is a finished example of ever
 - Optional: faster-whisper for the ASR check, run through `uv run --with faster-whisper`.
 - A podkst API key with the scopes `generate:podcast`, `read:jobs` and `billing:read`. The tools read `$PODKST_API_KEY` or `~/.config/podkst/api.key`. Never print, echo or log the key. Never ask the owner to paste it into the chat.
 
+`VD doctor` checks every item above and prints the fix for this OS. `VD setup` installs Playwright, Chromium and (with `--asr`) the whisper models, and starts the key form. It prints the commands for system packages and never runs them.
+
+### First-time key
+
+Send the owner these steps when there is no key:
+
+1. Sign in at https://podkst.ai.
+2. Open Dashboard, then Settings, then API Keys (https://podkst.ai/dashboard/api-keys).
+3. Create a key with the scopes `generate:podcast`, `read:jobs` and `billing:read`.
+4. Save it in one of two ways. Add `export PODKST_API_KEY=<your key>` to the shell profile, or paste it into the form that `VD safebox` serves. The form writes `~/.config/podkst/api.key` with mode 0600 and never echoes the key.
+
 ## Steps
 
 Copy these into your todo list and finish each one before the next.
 
+0. **Setup check.** Run `VD doctor`. If a required item shows FAIL, stop. Show the owner the FAIL lines with their fix lines, and offer to run `VD setup`. Run `VD doctor` again after the fixes. A WARN does not block, but tell the owner which step it affects.
 1. **Brief.** Write down the audience, the one thing they must remember, the slide arc, and where every number comes from. One idea per slide. Invent no numbers.
 2. **Deck.** Run `VD new deck.html`, then write the slides per `references/deck-design.md`. Read the `dataviz` skill before any chart if your session has it. Audit with `node ${CLAUDE_PLUGIN_ROOT}/tools/browser/audit.js $PWD/deck.html shots`. Look at the PNGs in `shots/` yourself and fix overflow, clipping, overlaps and slides over about 30 words.
 3. **Script.** Write `script.md`: one `## N · Title` section per slide, with a `[click]` wherever a build appears. Run `VD script script.md deck.html`. It writes the deck's `#pitch` JSON and fails if a slide's builds differ from its `[click]` count.
