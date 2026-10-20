@@ -9,7 +9,7 @@ This repo is a set of tools for coding agents. Each tool lives in `plugins/<tool
 3. Read a file under `references/` when a step points to it.
 4. Copy the skill's steps into your task list and finish each one before the next.
 
-For voiced-deck the CLI is `python3 -I plugins/voiced-deck/tools/voiced-deck`. Run it with `--help` for every command.
+For voiced-deck the CLI is `python3 -I plugins/voiced-deck/tools/voiced-deck`. Run it with `--help` for every command. Run its `doctor` command before the first step. It names each missing requirement and its fix.
 
 ## Secrets and private data
 

@@ -52,6 +52,8 @@ To see the PNG delivery for chat hosts that only inline images, open `http://loc
 - Python 3.10+, ffmpeg and numpy.
 - Optional: [faster-whisper](https://github.com/SYSTRAN/faster-whisper) for the per-line ASR check (`uv run --with faster-whisper ...`), and Node 18+ with Playwright for the browser checks and presenter tests.
 
+`voiced-deck doctor` checks all of these and prints the fix for your OS. `voiced-deck setup` installs Playwright, Chromium and the whisper models, and starts the key form. It prints the commands for system packages and never runs them.
+
 ### Layout
 
 ```
@@ -60,7 +62,7 @@ plugins/voiced-deck/
   skills/voiced-deck/references/     deck design bar, voice direction, Studio API notes, delivery
   tools/voiced-deck                  the CLI (python3, stdlib + numpy)
   tools/vdeck/                       its modules: studio client, script, performance, manifest,
-                                     prosody, ASR, PNG packing, delivery, safebox
+                                     prosody, ASR, PNG packing, delivery, safebox, doctor and setup
   tools/browser/                     build counts and slide audit in a headless browser
   template/deck.html                 the engine plus a 3-slide skeleton
   examples/demo/                     the voiced Hivewise demo
