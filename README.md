@@ -4,7 +4,7 @@ Tools for coding agents. Each tool is a Claude Code plugin with a skill that tel
 
 | Tool | What it does |
 |---|---|
-| [voiced-deck](plugins/voiced-deck) | Builds a keynote-grade, single-file HTML deck that presents itself. A natural pitch voice rendered through the [podkst](https://podkst.ai) Studio API drives every slide and build in sync. |
+| [voiced-deck](plugins/voiced-deck) | Builds a keynote-grade, single-file HTML deck that presents itself. A natural pitch voice rendered through the [podkst](https://podkst.ai) Studio API drives every slide and build in sync. `pack-single` puts the voice inside the HTML, so one file plays anywhere. |
 
 ## Install
 
@@ -35,6 +35,8 @@ Every step is one command of `plugins/voiced-deck/tools/voiced-deck`. `voiced-de
 
 **[Watch it in your browser](https://ib2.github.io/agent-tools/plugins/voiced-deck/examples/demo/deck.html)** and press **Presenter**.
 
+**[One file](https://ib2.github.io/agent-tools/plugins/voiced-deck/examples/demo/deck.single.html)** is the same demo with the voice inside the HTML (0.88 MB). Download it, mail it or drop it in a chat, and it still plays.
+
 The demo is a fictional seed pitch, Hivewise, with 7 slides and a 1 minute 55 second voice rendered with podkst.
 
 ```
@@ -44,7 +46,7 @@ python3 plugins/voiced-deck/tools/voiced-deck serve plugins/voiced-deck/examples
 
 Open `http://localhost:8765/deck.html` and press **Presenter** (or `P`). `K` pauses, `C` shows captions, the arrows jump slides, `Esc` stops.
 
-To see the PNG delivery for chat hosts that only inline images, open `http://localhost:8765/deck.inline.html`.
+To see the PNG delivery for chat hosts that only inline images, open `http://localhost:8765/deck.inline.html`. The one-file version is `deck.single.html`, and it plays from disk too.
 
 ### Requirements
 

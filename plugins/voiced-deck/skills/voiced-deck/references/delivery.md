@@ -2,6 +2,24 @@
 
 A voiced deck is `deck.html` plus `audio/deck.m4a` and `audio/deck.png`. The manifest inside the deck points at both with relative paths. Pick the route that matches where the owner will open it.
 
+| Route | Use it when | What you send |
+|---|---|---|
+| Single file (`VD pack-single`) | The deck travels as one file: a mail attachment, Slack, Drive, Downloads, or a paste into a chat host's sandboxed HTML preview. | `deck.single.html` |
+| Served folder (`VD serve` or any static host) | You control a web server or the owner opens the folder locally. Smallest files, and the waveform meter uses the Web Audio analyser. | The folder with `deck.html` and `audio/` |
+| PNG-packed loader (`VD pack-deck`) | The host renders HTML but only inlines the image files it references. | `deck.inline.html` and the PNGs |
+
+## One file that plays anywhere
+
+```
+VD pack-single --deck deck.html [--audio audio/deck.m4a] [--out deck.single.html] [--bitrate 32k] [--max-mb 2]
+```
+
+It copies the deck and replaces the manifest's audio sources with one `data:audio/mp4;base64,...` URI. Everything else in the file stays the same. With no `--audio`, it takes the manifest's `.m4a`, or decodes its packed PNG when the `.m4a` is gone. `--bitrate` re-encodes to mono AAC with ffmpeg and drops the file's metadata. Base64 adds a third to the audio size, so a 2 minute voice at 32k is about 0.6 MB of HTML. The command prints one size line and warns above `--max-mb` (default 2 MB), because mail servers and chat hosts cap attachments and pastes.
+
+The engine plays a `data:` source straight through the audio element and never through the Web Audio analyser. In an opaque-origin sandbox (`<iframe sandbox="allow-scripts">`, which is how chat hosts render HTML) the analyser cannot tell a `data:` source from a safe one, and some engines play analysed media silent. The waveform meter then follows the manifest's speech timing instead of the signal. `tests/presenter/single.test.js` opens the single file alone in a folder from `file://`, over http, and in a sandboxed `srcdoc` and `blob:` iframe, starts it with a real key press or click under the normal autoplay policy, and checks that time advances, captions show, builds advance, the element is not muted, and no Web Audio context holds the audio.
+
+A chat host may still refuse a large paste, strip `<script>`, or block sound in its preview. Then send the file as an attachment, or use one of the other routes.
+
 ## Local file or a web server
 
 - Send or publish the folder as is. Any static host works.
@@ -38,5 +56,5 @@ When the owner is not at the machine, expose the form for the few seconds it is 
 
 - `VD sync --deck deck.html --script script.md --performance performance.json --browser` passes.
 - `VD_DECK=$PWD/deck.html node tests/presenter/run.js` passes.
-- `deck.html` is under 200 KB.
+- `deck.html` is under 200 KB. A `deck.single.html` is under 2 MB, or the owner knows where it will not fit.
 - No key, project id or private number is in any file you send.

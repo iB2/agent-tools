@@ -1,6 +1,6 @@
 {
   "name": "voiced-deck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Keynote-grade single-file HTML decks that present themselves with a natural podkst voice: builds and slides follow the audio clock.",
   "author": {
     "name": "iB2"
