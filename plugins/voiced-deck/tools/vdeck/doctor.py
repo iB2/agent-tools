@@ -269,7 +269,7 @@ def check_whisper(ctx):
     missing = [m for m in MODELS if m not in have]
     if not missing:
         return Result(PASS, "cached: " + ", ".join(have))
-    return Result(WARN, "not cached: %s; the first ASR run downloads it" % ", ".join(missing))
+    return Result(WARN, "not cached: %s; the ASR check downloads models on first use" % ", ".join(missing))
 
 
 CHECKS = [
