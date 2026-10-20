@@ -33,6 +33,8 @@ Every step is one command of `plugins/voiced-deck/tools/voiced-deck`. `voiced-de
 
 ### 60-second demo
 
+**[Watch it in your browser](https://ib2.github.io/agent-tools/plugins/voiced-deck/examples/demo/deck.html)** and press **Presenter**.
+
 The demo is a fictional seed pitch, Hivewise, with 7 slides and a 1 minute 55 second voice rendered with podkst.
 
 ```
