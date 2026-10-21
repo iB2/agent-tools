@@ -51,8 +51,8 @@ Copy these into your todo list and finish each one before the next.
 9. **Pronunciation.** For a name the voice gets wrong, run `VD probe --performance performance.json --word <Word> --variant "<note 1>" --variant "<note 2>" --out audio --apply`. It renders each wording in a scratch project, scores each take by transcript, and writes the winning note into `performance.json`.
 10. **Re-master.** Edit `performance.json` (text, style, `gapAfterMs`, `pronounce`) and run `VD render` again. Only edited lines are re-synthesised. A line whose new direction equals a probe take reuses that audio at no cost. Use `VD regen --deck deck.html --performance performance.json <line id>` for a new take of an unchanged line.
 11. **Sync.** Run `VD sync --deck deck.html --script script.md --performance performance.json --browser`. Builds, `[click]` marks, performance segments and manifest must all agree at 1280, 728 and 390 px.
-12. **Presenter tests.** Run `VD pack-deck deck.html`, then `VD_DECK=$PWD/deck.html node ${CLAUDE_PLUGIN_ROOT}/tests/presenter/run.js`. All four files must pass.
-13. **Deliver.** Follow `references/delivery.md`: the folder with `deck.html` and `audio/`, served or opened locally, or the PNG-packed loader for chat hosts that only inline images.
+12. **Presenter tests.** Run `VD pack-deck deck.html`, then `VD_DECK=$PWD/deck.html node ${CLAUDE_PLUGIN_ROOT}/tests/presenter/run.js`. All five files must pass.
+13. **Deliver.** Follow `references/delivery.md`: the folder with `deck.html` and `audio/`, served or opened locally, or the PNG-packed loader for chat hosts that only inline images. To send one file that plays wherever it is opened (mail, Slack, Drive, a chat sandbox), run `VD pack-single --deck deck.html` and send `deck.single.html`.
 
 ## Rules
 

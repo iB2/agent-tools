@@ -1,7 +1,10 @@
+import base64
 import copy
 import json
 import os
 import pathlib
+import re
+import shutil
 import struct
 import subprocess
 import sys
@@ -66,6 +69,87 @@ class Delivery(unittest.TestCase):
     def test_demo_inline_png_is_the_current_deck(self):
         self.assertEqual(pngpack.unpack((DEMO / "deck.inline.png").read_bytes()), (DEMO / "deck.html").read_bytes(),
                          "run: voiced-deck pack-deck examples/demo/deck.html")
+
+
+class Single(unittest.TestCase):
+    CLI = PLUGIN / "tools" / "voiced-deck"
+
+    def demo_copy(self, d, audio=True):
+        deck = pathlib.Path(d) / "deck.html"
+        deck.write_text((DEMO / "deck.html").read_text(encoding="utf-8"), encoding="utf-8")
+        if audio:
+            (pathlib.Path(d) / "audio").mkdir()
+            (pathlib.Path(d) / "audio" / "deck.m4a").write_bytes((DEMO / "audio" / "deck.m4a").read_bytes())
+        return deck
+
+    def embedded(self, html):
+        src = deckfile.manifest(html)["audio"]
+        self.assertEqual(list(src), ["m4a"])
+        self.assertTrue(src["m4a"].startswith("data:audio/mp4;base64,"))
+        return base64.b64decode(src["m4a"].split(",", 1)[1])
+
+    def test_no_external_audio_reference(self):
+        with tempfile.TemporaryDirectory() as d:
+            dest, n = deliver.pack_single(self.demo_copy(d))
+            html = dest.read_text(encoding="utf-8")
+            self.assertEqual(dest.name, "deck.single.html")
+            ref = re.search(r"[\"'(][^\"'()\s]*\.(m4a|mp3|wav|png)[\"')?#]", html)
+            self.assertIsNone(ref, ref and ref.group(0))
+            self.assertEqual(self.embedded(html), (DEMO / "audio" / "deck.m4a").read_bytes())
+            self.assertEqual(n, (DEMO / "audio" / "deck.m4a").stat().st_size)
+            src = (DEMO / "deck.html").read_text(encoding="utf-8")
+            self.assertEqual(deckfile.MANIFEST_RE.sub("", html), deckfile.MANIFEST_RE.sub("", src))
+
+    def test_falls_back_to_the_packed_png_and_is_idempotent(self):
+        with tempfile.TemporaryDirectory() as d:
+            deck = self.demo_copy(d, audio=False)
+            (pathlib.Path(d) / "audio").mkdir()
+            (pathlib.Path(d) / "audio" / "deck.png").write_bytes((DEMO / "audio" / "deck.png").read_bytes())
+            once, _ = deliver.pack_single(deck)
+            twice, _ = deliver.pack_single(once, out=pathlib.Path(d) / "again.html")
+            self.assertEqual(once.read_text(encoding="utf-8"), twice.read_text(encoding="utf-8"))
+
+    def test_refuses_non_mp4_without_bitrate(self):
+        with tempfile.TemporaryDirectory() as d:
+            wav = pathlib.Path(d) / "voice.wav"
+            wav.write_bytes(b"RIFF\0\0\0\0WAVEfmt " + b"\0" * 32)
+            with self.assertRaises(SystemExit):
+                deliver.pack_single(self.demo_copy(d), audio=wav)
+
+    @unittest.skipUnless(shutil.which("ffmpeg"), "needs ffmpeg")
+    def test_bitrate_shrinks_and_reports_size(self):
+        with tempfile.TemporaryDirectory() as d:
+            deck = self.demo_copy(d)
+            loud = pathlib.Path(d) / "loud.m4a"
+            subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "sine=frequency=440:duration=20", "-ac", "2",
+                            "-c:a", "aac", "-b:a", "192k", str(loud)], check=True)
+            out = pathlib.Path(d) / "small.html"
+            r = subprocess.run([sys.executable, "-I", str(self.CLI), "pack-single", "--deck", str(deck), "--audio", str(loud),
+                                "--out", str(out), "--bitrate", "24k", "--max-mb", "0.01"], capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            lines = r.stdout.strip().splitlines()
+            self.assertRegex(lines[0], r"small\.html: \d+\.\d\d MB in one file \(audio \d+ KB at 24k, no external audio\)")
+            self.assertIn("warning: small.html is over 0.01 MB", lines[1])
+            audio = self.embedded(out.read_text(encoding="utf-8"))
+            self.assertEqual(audio[4:8], b"ftyp")
+            self.assertLess(len(audio), loud.stat().st_size / 4)
+            probe = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=channels", "-of", "csv=p=0", "-"],
+                                   input=audio, capture_output=True)
+            self.assertEqual(probe.stdout.strip(), b"1")
+
+    def test_pack_deck_still_packs_a_single_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            single, _ = deliver.pack_single(self.demo_copy(d))
+            page, png, audio = deliver.pack_deck(single)
+            self.assertEqual(audio, "")
+            self.assertEqual(pngpack.unpack(png.read_bytes()), single.read_bytes())
+
+    def test_demo_single_is_current(self):
+        with tempfile.TemporaryDirectory() as d:
+            fresh, _ = deliver.pack_single(DEMO / "deck.html", out=pathlib.Path(d) / "deck.single.html")
+            self.assertEqual((DEMO / "deck.single.html").read_bytes(), fresh.read_bytes(),
+                             "run: voiced-deck pack-single --deck examples/demo/deck.html")
+            self.assertLess(fresh.stat().st_size, 1.5 * 2**20)
 
 
 class Manifest(unittest.TestCase):
@@ -181,6 +265,16 @@ class Scrub(unittest.TestCase):
             r = subprocess.run([sys.executable, "-I", str(REPO / "scripts" / "scrub_check.py"), d], capture_output=True, text=True, env=env)
             self.assertEqual(r.returncode, 1, r.stdout)
             self.assertEqual(r.stdout.count("FAIL"), len(planted), r.stdout)
+
+    def test_scrub_check_reads_embedded_audio_metadata(self):
+        meta = b"\0\0\0\x18ftypM4A " + ("owner" + "@corp.io").encode()
+        uri = "data:audio/mp4;base64," + base64.b64encode(meta).decode() + "/C" + "PF+"
+        with tempfile.TemporaryDirectory() as d:
+            subprocess.run(["git", "init", "-q", d], check=True)
+            (pathlib.Path(d) / "deck.single.html").write_text(f'<script>{{"m4a":"{uri}"}}</script>', encoding="utf-8")
+            r = subprocess.run([sys.executable, "-I", str(REPO / "scripts" / "scrub_check.py"), d], capture_output=True, text=True)
+            self.assertEqual(r.stdout.count("FAIL"), 1, r.stdout)
+            self.assertIn("[embedded audio metadata]", r.stdout)
 
     def test_repo_is_clean(self):
         r = subprocess.run([sys.executable, "-I", str(REPO / "scripts" / "scrub_check.py")], capture_output=True, text=True)

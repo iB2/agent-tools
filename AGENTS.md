@@ -9,7 +9,7 @@ This repo is a set of tools for coding agents. Each tool lives in `plugins/<tool
 3. Read a file under `references/` when a step points to it.
 4. Copy the skill's steps into your task list and finish each one before the next.
 
-For voiced-deck the CLI is `python3 -I plugins/voiced-deck/tools/voiced-deck`. Run it with `--help` for every command. Run its `doctor` command before the first step. It names each missing requirement and its fix.
+For voiced-deck the CLI is `python3 -I plugins/voiced-deck/tools/voiced-deck`. Run it with `--help` for every command. Run its `doctor` command before the first step. It names each missing requirement and its fix. To hand the owner one file that plays wherever it is opened, run `pack-single --deck deck.html` and send `deck.single.html`. `references/delivery.md` says when to send that, the served folder or the PNG-packed loader instead.
 
 ## Secrets and private data
 
@@ -19,6 +19,6 @@ For voiced-deck the CLI is `python3 -I plugins/voiced-deck/tools/voiced-deck`. R
 
 ## Working on this repo
 
-- Edit the engine only in `plugins/voiced-deck/template/deck.html`, then run `python3 -I plugins/voiced-deck/tools/voiced-deck engine-sync plugins/voiced-deck/examples/demo/deck.html`.
+- Edit the engine only in `plugins/voiced-deck/template/deck.html`, then run `python3 -I plugins/voiced-deck/tools/voiced-deck engine-sync plugins/voiced-deck/examples/demo/deck.html`. Then rebuild the demo's delivery files with `pack-deck plugins/voiced-deck/examples/demo/deck.html` and `pack-single --deck plugins/voiced-deck/examples/demo/deck.html`. The unit tests fail while either is stale.
 - Run `npm test` before you commit. It runs the unit tests, the presenter tests and the scrub check.
 - Write plain English: short sentences, no long dashes, no mid-sentence colons.

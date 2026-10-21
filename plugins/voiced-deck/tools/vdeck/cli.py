@@ -213,6 +213,14 @@ def cmd_pack_deck(a):
     print(f"{page}: loader, {png.name} {png.stat().st_size // 1024} KB" + (f", audio {audio}" if audio else ", no audio"))
 
 
+def cmd_pack_single(a):
+    dest, audio = deliver.pack_single(a.deck, a.audio, a.out, a.bitrate)
+    size = dest.stat().st_size
+    print(f"{dest}: {size / 2**20:.2f} MB in one file (audio {audio // 1024} KB{' at ' + a.bitrate if a.bitrate else ''}, no external audio)")
+    if size > a.max_mb * 2**20:
+        print(f"warning: {dest.name} is over {a.max_mb:g} MB; mail and chat hosts may refuse it. Try --bitrate 24k.")
+
+
 def cmd_serve(a):
     deliver.serve(pathlib.Path(a.root).resolve(), a.port)
 
@@ -231,7 +239,8 @@ def cmd_setup(a):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="voiced-deck", description="Build a keynote-grade HTML deck that presents itself with a podkst voice.")
+    ap = argparse.ArgumentParser(prog="voiced-deck", description="Build a keynote-grade HTML deck that presents itself with a podkst voice.",
+                                 epilog="Deliver with pack-single for one file that plays anywhere, pack-deck for hosts that only inline images, or serve for a folder.")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     def add(name, fn, help_):
@@ -332,6 +341,12 @@ def main(argv=None):
     p = add("pack-deck", cmd_pack_deck, "pack the deck into a PNG plus an inline loader page")
     p.add_argument("deck")
     p.add_argument("--out")
+    p = add("pack-single", cmd_pack_single, "write one self-contained HTML with the audio embedded, so it plays with no files beside it")
+    p.add_argument("--deck", required=True)
+    p.add_argument("--audio", help="audio file to embed; default is the manifest's m4a, else its packed PNG")
+    p.add_argument("--out", help="default <deck>.single.html next to the deck")
+    p.add_argument("--bitrate", help="re-encode to mono AAC at this bitrate with ffmpeg, e.g. 32k")
+    p.add_argument("--max-mb", type=float, default=2.0, help="warn above this size in MB (default 2)")
     p = add("serve", cmd_serve, "serve a folder on localhost with audio MIME types")
     p.add_argument("root")
     p.add_argument("--port", type=int, default=8765)

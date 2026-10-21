@@ -3,8 +3,10 @@
 
 usage: python3 scripts/scrub_check.py [root]
 Scans every file git tracks (plus untracked, not ignored files), decodes PNGs packed by
-voiced-deck and scans their payload, then scans commit messages. Exits 1 on any hit.
+voiced-deck and scans their payload, scans the metadata of audio embedded as data: URIs,
+then scans commit messages. Exits 1 on any hit.
 """
+import base64
 import os
 import pathlib
 import re
@@ -34,6 +36,7 @@ if PRIVATE.is_file():
         if line.strip() and not line.lstrip().startswith("#"):
             RULES.append(("private phrase", "(?i)" + line.strip()))
 RX = [(name, re.compile(rx)) for name, rx in RULES]
+DATA_AUDIO = re.compile(r"data:audio/[a-z0-9.+-]+;base64,([A-Za-z0-9+/=]+)")
 TEXT_EXT = {".md", ".py", ".js", ".json", ".html", ".txt", ".yml", ".yaml", ".toml", ".cfg", ".sh", ".tsv", ".csv", ""}
 
 
@@ -63,7 +66,11 @@ def main():
         rel = p.relative_to(ROOT)
         data = p.read_bytes()
         if p.suffix.lower() in TEXT_EXT or p.name in ("LICENSE", "voiced-deck"):
-            scan(str(rel), data.decode("utf-8", "replace"), hits)
+            text = data.decode("utf-8", "replace")
+            for m in DATA_AUDIO.finditer(text):
+                head = base64.b64decode(m.group(1)[:5464] + "=" * (-len(m.group(1)[:5464]) % 4))
+                scan(str(rel) + " [embedded audio metadata]", head[:4096].decode("latin-1"), hits)
+            scan(str(rel), DATA_AUDIO.sub("data:audio", text), hits)
             n += 1
         elif p.suffix.lower() == ".png" and pngpack:
             try:

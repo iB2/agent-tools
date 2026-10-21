@@ -34,11 +34,25 @@ On Claude Code 2.1.275 or later, one step works too: `/plugin install voiced-dec
 | `measure` | Prosody of any audio file or slice. |
 | `embed` | Embeds or clears a manifest. Idempotent, and refuses a manifest that does not match the deck. |
 | `pack`, `unpack` | Any file into PNG pixels and back. |
+| `pack-single` | One self-contained HTML with the audio embedded as a `data:` URI, so it plays with no files beside it. `--bitrate 32k` re-encodes to mono AAC with ffmpeg to shrink it, `--max-mb` (default 2) sets the size warning. |
 | `pack-deck` | The deck as a PNG plus a tiny loader, for chat hosts that only inline images. |
 | `serve` | Serves a folder on localhost with audio MIME types. |
 | `safebox` | One-time localhost form that stores the podkst key with mode 0600. |
 
 Browser tools: `node tools/browser/builds.js <deck>` and `node tools/browser/audit.js <deck> [outDir]`.
+
+## One file, plays anywhere
+
+A rendered deck is `deck.html` plus `audio/deck.m4a`. Send the HTML alone and it opens silent. `pack-single` puts the audio inside the HTML:
+
+```
+python3 -I tools/voiced-deck pack-single --deck deck.html
+python3 -I tools/voiced-deck pack-single --deck deck.html --bitrate 32k
+```
+
+It writes `deck.single.html` and prints its size. The file plays from an email attachment, Slack, Drive, Downloads, a web server, or pasted into a chat host's sandboxed preview where the host allows the size and sound. The demo's single file is [examples/demo/deck.single.html](examples/demo/deck.single.html), 0.88 MB.
+
+When to use which route is in [references/delivery.md](skills/voiced-deck/references/delivery.md).
 
 ## First run
 
