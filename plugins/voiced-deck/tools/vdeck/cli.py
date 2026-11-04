@@ -167,7 +167,8 @@ def cmd_asr(a):
     out = pathlib.Path(a.out)
     man = json.loads((out / "manifest.json").read_text())
     perf = P.load(a.performance) if a.performance else {}
-    res = asr.run(out / "master.wav", man, perf.get("respell"), a.model)
+    lang = asr.lang_of(perf.get("language"))
+    res = asr.run(out / "master.wav", man, perf.get("respell"), a.model or asr.default_model(lang), language=lang)
     (out / "asr.json").write_text(json.dumps(res, indent=1, ensure_ascii=False))
     bad = [o for o in res if asr.flagged(o)]
     print(f"lines {len(res)}, flagged {len(bad)}, mean wer {sum(o['wer'] for o in res) / max(1, len(res)):.3f}")
@@ -311,8 +312,8 @@ def main(argv=None):
     p.add_argument("--out", required=True)
     p = add("asr", cmd_asr, "transcribe each line with faster-whisper and flag mismatches")
     p.add_argument("--out", required=True)
-    p.add_argument("--performance")
-    p.add_argument("--model", default="small.en")
+    p.add_argument("--performance", help="its language sets the transcription language (default en-US)")
+    p.add_argument("--model", help="faster-whisper model (default small.en for English, small otherwise)")
     p = add("probe", cmd_probe, "try N pronunciation notes for a hard word in a scratch project and keep the best")
     p.add_argument("--performance", required=True)
     p.add_argument("--word", required=True)
