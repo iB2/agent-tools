@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+voiced-deck:
+
+- `asr` transcribes in the language of `performance.json`. It used to force English, so a pt-BR deck came back translated to English and every line was flagged. Other languages default to the multilingual `small` model.
+
 ## 0.2.0
 
 voiced-deck:

@@ -23,7 +23,7 @@ PLUGIN = pathlib.Path(__file__).resolve().parents[2]
 REPO = PLUGIN.parents[1]
 LIB = PLUGIN / "tools" / "browser" / "lib.js"
 PLAYWRIGHT = "playwright@^1.56.0"
-# asr defaults to small.en; probe also transcribes other languages with small.
+# asr uses small.en for English and small for other languages; probe also transcribes other languages with small.
 MODELS = ("small.en", "small")
 SCOPES = ("generate:podcast", "read:jobs", "billing:read")
 PASS, WARN, FAIL = "PASS", "WARN", "FAIL"

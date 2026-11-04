@@ -104,6 +104,16 @@ def transcribe(m, audio, sr, a, b, language="en"):
     return " ".join(s.text for s in segs).strip()
 
 
+def lang_of(code):
+    """Whisper language for a performance language: "pt-BR" -> "pt", "en-US" -> "en"."""
+    return (code or "en-US").split("-")[0].lower()
+
+
+def default_model(language):
+    """small.en is English only and translates other speech to English, so other languages use small."""
+    return "small.en" if language == "en" else "small"
+
+
 def run(wav, man, respell=None, model_name="small.en", language="en"):
     audio = measure.decode(wav, sr=16000)
     m = model(model_name)

@@ -244,6 +244,13 @@ class Performance(unittest.TestCase):
 
 
 class Asr(unittest.TestCase):
+    def test_asr_language_follows_performance(self):
+        self.assertEqual(asr.lang_of("pt-BR"), "pt")
+        self.assertEqual(asr.lang_of("en-US"), "en")
+        self.assertEqual(asr.lang_of(None), "en")
+        self.assertEqual(asr.default_model("en"), "small.en")
+        self.assertEqual(asr.default_model("pt"), "small")
+
     def test_numbers_normalise(self):
         self.assertEqual(asr.wer("Today it's one thousand two hundred and forty.", "Today, it's 1,240.")[0], 0.0)
         self.assertEqual(asr.wer("In twenty twenty-seven.", "In 2027.")[0], 0.0)
